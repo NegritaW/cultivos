@@ -23,3 +23,54 @@ def listar_cultivos(request):
         'cultivos': cultivo_filtrados,
     }
     return render(request, 'cultivos/lista_cultivos.html', contexto)
+
+def detalle_cultivo(request, nombre):
+    cultivos = {
+        'Tomate': {
+            'tipo':'fruto',
+            'descripcion':'Requiere sol directo y riego moderado, muy sensible al frio',
+            'siembra':'Agosto-Octubre',
+            'cosecha':'Noviembre-Enero'
+        },
+        'Lechuga': {
+            'tipo':'hoja',
+            'descripcion':'Requiere sombra y riego constante, suelo humedo',
+            'siembra':'Marzo-Mayo',
+            'cosecha':'60 dias despues de la siembra'
+        },
+        'Albahaca': {
+            'tipo':'hoja',
+            'descripcion':'Climas calidos, no tolerancia a heladas',
+            'siembra':'Septiembre-Noviembre',
+            'cosecha':'40 dias despues de la siembra'
+        },
+        'Zanahoria': {
+            'tipo':'raiz',
+            'descripcion':'Requiere sol directo y riego moderado, muy sensible al frio',
+            'siembra':'Agosto-Octubre',
+            'cosecha':'Noviembre-Enero'
+        },
+        'Cilantro': {
+            'tipo':'hoja',
+            'descripcion':'Requiere sol directo y riego moderado, muy sensible al frio',
+            'siembra':'Agosto-Octubre',
+            'cosecha':'Noviembre-Enero'
+        },
+        'Pimiento': {
+            'tipo':'fruto',
+            'descripcion':'Requiere sol directo y riego moderado, muy sensible al frio',
+            'siembra':'Agosto-Octubre',
+            'cosecha':'Noviembre-Enero'
+        },
+    }
+    cultivos = cultivos.get(nombre)
+    if not cultivos:
+        return render(request, 'cultivos/no_encontrado.html', {'nombre':nombre})
+    contexto ={
+        'nombre':nombre,
+        'tipo':cultivos['tipo'],
+        'descripcion':cultivos['descripcion'],
+        'siembra':cultivos['siembra'],
+        'cosecha':cultivos['cosecha'],
+    }
+    return render(request, 'cultivos/detalle.html', contexto)
