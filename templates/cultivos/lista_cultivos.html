@@ -2,6 +2,28 @@
 {% block title %}Mis Cultivos{% endblock title %}Mis Cultivos
 {% block content %}
     <h1 class = 'mb-4'>Mis Cultivos</h1>
+
+    <h2>Filtro de cultivos</h2>
+    <form class="mb-4"  method="get">
+      <div class="row g-2">
+        <div class="col-md-6">
+          <input type="text" class="form-control" 
+          placeholder="Buscar por nombre" name="buscar" value="{{ request.GET.buscar }}">
+        </div>
+        <div class="col-md-4">
+          <select name="tipo" class="form-select">
+            <option value="">--Tipo de Cultivo--</option>
+            <option value="hoja" {% if request.GET.tipo == "hoja" %}selected{% endif %}>Hoja</option>
+            <option value="fruto" {% if request.GET.tipo == "fruto" %}selected{% endif %}>Fruto</option>
+            <option value="raiz" {% if request.GET.tipo == "raiz" %}selected{% endif %}>Raíz</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-primary w-100" type="submit">Filtrar</button>
+        </div>
+      </div>
+    </form>
+
     <table class="table">
         <thead>
           <tr>
@@ -15,7 +37,11 @@
           <tr>
             <td>{{ cultivo.nombre }}</td>
             <td>{{ cultivo.tipo }}</td>
-            <td>Ver detalles</td>
+            <td>
+              <a href="{% url 'detalle_cultivo' cultivo.nombre %}" class="btn btn-sm btn-outline-primary">
+                Ver Detalle
+              </a>
+            </td>
 
           </tr>
           {% empty %}
