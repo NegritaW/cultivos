@@ -74,3 +74,28 @@ def detalle_cultivo(request, nombre):
         'cosecha':cultivos['cosecha'],
     }
     return render(request, 'cultivos/detalle.html', contexto)
+
+def recomendar_cultivo(request):
+    cultivos_por_estacion = {
+        'verano': 'Albahaca',
+        'otonio': 'Tomate',
+        'invierno': 'Cilantro',
+        'primavera': 'Pimiento',
+    }
+
+    estacion_front = request.GET.get('estacion', '')
+    if not estacion_front:
+        return render(request, 'cultivos/no_encontrado.html')
+    contexto = {
+        'cultivo': cultivos_por_estacion,
+    }
+    return render(request, 'cultivos/recomendar.html', contexto)
+
+def consejo_diario(request, consejo):
+    pass
+
+def evaluar_riego(request, riego):
+    pass
+
+def calculador_espacio(request, espacio):
+    pass
