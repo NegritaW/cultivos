@@ -77,19 +77,25 @@ def detalle_cultivo(request, nombre):
 
 def recomendar_cultivo(request):
     cultivos_por_estacion = {
-        'verano': 'Albahaca',
-        'otonio': 'Tomate',
-        'invierno': 'Cilantro',
-        'primavera': 'Pimiento',
+        'verano': {'nombre': 'Albahaca', 'tipo': 'hoja'},
+        'otonio': {'nombre': 'Tomate', 'tipo': 'fruto'},
+        'invierno': {'nombre': 'Cilantro', 'tipo': 'hoja'},
+        'primavera': {'nombre': 'Pimiento', 'tipo': 'fruto'},
     }
 
     estacion_front = request.GET.get('estacion', '')
-    if not estacion_front:
-        return render(request, 'cultivos/no_encontrado.html')
+
+    if estacion_front and estacion_front in cultivos_por_estacion:
+        cultivos_filtrados = [cultivos_por_estacion[estacion_front]]
+    else:
+        cultivos_filtrados = list(cultivos_por_estacion.values())
+
+    print("DEBUG cultivos_filtrados:", cultivos_filtrados)
+
     contexto = {
-        'cultivo': cultivos_por_estacion,
+        'cultivos': cultivos_filtrados,
     }
-    return render(request, 'cultivos/recomendar.html', contexto)
+    return render(request, 'cultivos/lista_cultivos.html', contexto)
 
 def consejo_diario(request, consejo):
     pass

@@ -24,22 +24,22 @@
       </div>
     </form>
     <h2>Filtro de estaciones</h2>
-    <form class="mb-4" method="get">
-      <div class="row g-2">
-        <div class="col-md-4">
-          <select name="tipo" class="form-select">
-            <option value="">--Estacion del año--</option>
-            <option value="verano" {%if request.GET.estacion == "verano"%}selected{%endif%}>Verano</option>
-            <option value="otonio" {%if request.GET.estacion == "otonio"%}selected{%endif%}>Otoño</option>
-            <option value="invierno" {%if request.GET.estacion == "invierno"%}selected{%endif%}>Invierno</option>
-            <option value="primavera" {%if request.GET.estacion == "primavera"%}selected{%endif%}>Primavera</option>
-          </select>
+      <form class="mb-4" method="get">
+        <div class="row g-2">
+          <div class="col-md-4">
+            <select name="estacion" class="form-select">
+              <option value="">--Estacion del año--</option>
+              <option value="verano" {% if request.GET.estacion == "verano" %}selected{% endif %}>Verano</option>
+              <option value="otonio" {% if request.GET.estacion == "otonio" %}selected{% endif %}>Otoño</option>
+              <option value="invierno" {% if request.GET.estacion == "invierno" %}selected{% endif %}>Invierno</option>
+              <option value="primavera" {% if request.GET.estacion == "primavera" %}selected{% endif %}>Primavera</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-primary w-100" type="submit">Recomendar</button>
+          </div>
         </div>
-        <div class="col-md-2">
-          <button class="btn btn-primary w-100" type="submit">Recomendar</button>
-        </div>
-      </div>
-    </form>
+      </form>
     <table class="table table-striped">
   <thead>
     <tr>
